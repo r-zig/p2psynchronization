@@ -1,0 +1,24 @@
+﻿<package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>P2PSync</id>
+    <version>1.0.0.24</version>
+    <authors>Ron zigelman</authors>
+    <!--<owners>Ron zigelman</owners>-->
+    <licenseUrl>http://www.roniz.net/2011/07/my-work-license.html</licenseUrl>
+    <projectUrl>http://p2psynchronization.codeplex.com</projectUrl>
+    <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>An infrastructure that provides application business logic synchronization between peers using WCF P2P.</description>
+    <!--<tags>P2P Synchronization PeerChannel WCF</tags>-->
+    <!--<dependencies>
+      <dependency id="Roniz.Diagnostics" version="1.0.0.13" />
+    </dependencies>-->
+  </metadata>
+  <files>
+    <file src="..\sync\bin\release\*.dll" target="lib\NET40" />
+    <!--<file src="..\roniz.wcf.p2p.sync\bin\release\*.dll" target="lib\NET40ClientProfile" />-->
+    <file src="app.config.transform" target="content" />
+    <!--does not add the assemblies references and also cause that the package can installed only via the console-->
+    <!--<file src="Install.ps1" />-->
+  </files>
+</package>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <system.serviceModel>
+    <bindings>
+      <netPeerTcpBinding>
+        <binding name="NetPeerTcpBindingUnsecure">
+          <security mode="None" />
+        </binding>
+      </netPeerTcpBinding>
+    </bindings>
+    <client>
+      <!--You can change here the mesh address to support specific needs-->
+      <endpoint address="net.p2p://Roniz.WCF.P2P.Sync.DefaultMeshAddress" 
+                binding="netPeerTcpBinding"
+                bindingConfiguration="NetPeerTcpBindingUnsecure" 
+                contract="Roniz.WCF.P2P.Sync.Interfaces.ISynchronizedState"
+                name="SyncDefaultEndpointConfigurationName" 
+                kind="" 
+                endpointConfiguration="" />
+    </client>
+  </system.serviceModel>
+</configuration>

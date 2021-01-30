@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Assembly>
+  <Method Name="Roniz.WCF.P2P.Sync.SynchronizationStateManager..ctor(Roniz.WCF.P2P.Sync.Interfaces.ISynchronizationBusinessLogic)">
+    <Outcome Kind="Informational" Outcome="Bottom" Message="Contract.Requires(synchronizationBusinessLogic != null);" PrimaryILOffset="2" MethodILOffset="0" />
+    <Outcome Kind="Requires" Outcome="Top" Message="requires unproven: synchronizationBusinessLogic != null" PrimaryILOffset="d" MethodILOffset="11" />
+  </Method>
+  <Method Name="Roniz.WCF.P2P.Sync.SynchronizationStateManager..ctor(Roniz.WCF.P2P.Sync.Interfaces.ISynchronizationBusinessLogic,System.String)">
+    <Outcome Kind="Informational" Outcome="Bottom" Message="Contract.Requires(synchronizationBusinessLogic != null);" PrimaryILOffset="8" MethodILOffset="0" />
+    <Outcome Kind="Requires" Outcome="Top" Message="requires unproven: synchronizationBusinessLogic != null" PrimaryILOffset="d" MethodILOffset="d" />
+    <Outcome Kind="Informational" Outcome="Bottom" Message="Contract.Requires(!string.IsNullOrEmpty(endpointConfigurationName));" PrimaryILOffset="8" MethodILOffset="0" />
+    <Outcome Kind="Requires" Outcome="Top" Message="requires unproven: !string.IsNullOrEmpty(endpointConfigurationName)" PrimaryILOffset="1b" MethodILOffset="d" />
+  </Method>
+</Assembly>

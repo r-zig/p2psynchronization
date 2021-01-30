@@ -1,0 +1,111 @@
+﻿<Window x:Class="Roniz.WCF.P2P.ApplicationTester.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Roniz P2P Application Tester" Height="330" Width="600">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Menu>
+            <MenuItem Header="Connect" Click="Connect_Click" ToolTip="When connect this instance will try to connect to other peers , when it will connected its status become online and it should synchronize with the the peers data (see the grid)"></MenuItem>
+            <MenuItem Header="Disconnect" Click="Disconnect_Click" ToolTip="when disconnect this peer will send message to other peers and in other application instance its row information should removed from the grid, also it will clean its own grid"></MenuItem>
+            <MenuItem Header="Send update of own details" Click="SendUpdate_Click" ToolTip="will take the current values as they appear in the user details section of this window and send them to all other peers"></MenuItem>
+
+            <MenuItem Header="Options...">
+                <MenuItem Name="menuAutoPublish" 
+                          Header="Publish own details uppon online" 
+                          IsCheckable="True"
+                          IsChecked="True"
+                          ToolTip="When peer become online it will synchronized itself with other peers data , but until called send update , or set this option to true , it will not publish to the others it's own data"></MenuItem>
+                <MenuItem Name="menuSynchronizationModeReliable"
+                          Header="Synchronization mode...">
+                    <StackPanel>
+                        <!--<RadioButton Name="rbEconomical" Content="Economical" IsChecked="False" GroupName="SynchronizationMode" Margin="2"/>-->
+                        <RadioButton Name="rbReliable" 
+                                     Content="Reliable" 
+                                     IsChecked="True" 
+                                     GroupName="SynchronizationMode" 
+                                     ToolTip="Will use default value of 30 seconds between refresh synchronization attempts"
+                                     Margin="2"/>
+                    </StackPanel>
+                </MenuItem>
+
+                <MenuItem Name="menuUseGenericResolver" 
+                          Header="Use generic resolver" 
+                          IsCheckable="True"
+                          IsChecked="True"
+                          ToolTip="If to use GenericResolver or base on the default serialization known types" />
+            </MenuItem>
+        </Menu>
+
+        <DataGrid x:Name="stateGrid"
+                  Grid.Row="1"
+                  Grid.Column="1"
+                  ItemsSource="{Binding MySynchronizationBusinessLogic.MyStateDictionary}"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  IsReadOnly="True"
+                  AutoGenerateColumns="False"
+                  >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Key"  Binding="{Binding Path=Key}"/>
+                <DataGridCheckBoxColumn Header="IsOwnPeerData" Binding="{Binding Path=Value.IsOwnPeerData}"/>
+                <DataGridTextColumn Header="Value.Name"  Binding="{Binding Path=Value.Name}"/>
+                <DataGridTextColumn Header="Value.Data"  Binding="{Binding Path=Value.Data}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Border Grid.Row="2" BorderThickness="2" BorderBrush="NavajoWhite">
+            <TextBlock Text="{Binding Path=MySynchronizationBusinessLogic.MyStateDictionary.Count,Mode=OneWay,StringFormat=peers count: \{0\}}" />
+        </Border>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <GroupBox Header="User details:"
+                      >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="250"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Name:" />
+                    <TextBox Name="textBoxName"
+                               Grid.Row="0"
+                               Grid.Column="1"
+                               Text="{Binding Path=UserState.Name,Mode=TwoWay}"/>
+
+                    <TextBlock Text="Data:" 
+                           Grid.Row="1"/>
+                    <TextBox Name="textBoxData" 
+                               Grid.Row="1"
+                               Grid.Column="1"
+                               Text="{Binding Path=UserState.Data,Mode=TwoWay}" Margin="0,2,0,-2" />
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="Diagnostic details:"
+                      Grid.Column="1">
+                <StackPanel>
+                    <Border BorderThickness="2" Margin="3">
+                        <TextBlock Name="textBlockCommunicationState" Text="{Binding Path=SyncManager.State,Mode=OneWay,StringFormat=Communication state: \{0\}}"/>
+                    </Border>
+                    <Border BorderThickness="2" Margin="3">
+                        <TextBlock Name="textBlockProcessId" Text="{Binding Path=ProcessId,Mode=OneWay, StringFormat=Process Id: \{0\}}" />
+                    </Border>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</Window>

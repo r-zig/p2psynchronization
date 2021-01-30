@@ -1,0 +1,6 @@
+1. Ability to send unicast response back only to the requester peer
+2. Ability to send hop-request , that if the receiver has the answer the request will not flood to next hops
+3. ability to send unicast message to specific peer in the mesh
+4. infratructure framework to enable automatic state synchronization between all peers in the mesh
+5. reliable messaging in the mesh
+6. show mesh topology in runtime
